@@ -21,12 +21,18 @@ export default {
   padding: 0px;
 }
 body,
-html {
+html,
+#app {
   width: 100%;
   height: 100%;
   font-size: px2rem(22);
 }
 .mint-msgbox {
   width: 50%;
+}
+.mint-swipe-indicator {
+  width: 25px;
+  height: 25px;
+  margin: px2rem(10);
 }
 </style>

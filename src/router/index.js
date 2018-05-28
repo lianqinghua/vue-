@@ -13,11 +13,18 @@ import user from '@/page/user.vue'
 
 // 结算订单
 import cartOrder from '@/page/cartOrder.vue'
+// q启动页
+import startup from '@/page/startup.vue'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
+    {
+      path: '/',
+      name: 'startup',
+      component: startup
+    },
     {
       path: '/cart',
       name: 'cart',
