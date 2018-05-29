@@ -11,16 +11,16 @@
         <div class="check" @click="check(element,i)">
           <div class="check-in" v-if='element.hid'></div>
         </div>
-        <div class="item-img">
+        <div class="item-img" @click="delit(element)">
           <img :src="element.img" :alt="element.name">
         </div>
         <div class="item-details">
           <div class="item-name" v-text="element.name">歌莉娅女装 2016冬装新款 连衣帽针织衫 显瘦身 15DJ8C040</div>
           <div class="item-tab-1">
             <span>颜色:</span>
-            <span class="item-color red" v-text="element.color[0]">13</span>
+            <span class="item-color red" v-text="element.color">13</span>
             <span>尺码:</span>
-            <span class="item-size red" v-text="element.size[0]">2131</span>
+            <span class="item-size red" v-text="element.size">2131</span>
           </div>
           <div class="item-tab-2">
             <div class="phone">
@@ -62,7 +62,7 @@ export default {
     return {}
   },
   methods: {
-    ...mapMutations(['setTotal', 'setCount', 'setCheck']),
+    ...mapMutations(['setTotal', 'setCount', 'setCheck', 'delit']),
     // 商品选择
     check(item, i) {
       if (item.hid === true) {
@@ -118,6 +118,14 @@ export default {
     numhid(item) {
       // item.hid = false
       this.chengeCount()
+    },
+    // 详情页
+    delit(stop) {
+      this.$router.push({
+        path: '/details',
+        name: 'details',
+        params: stop
+      })
     }
   },
   computed: {
@@ -157,6 +165,7 @@ export default {
         border: px2rem(1) solid #ccc;
         margin: px2rem(15);
         margin-left: 0;
+        cursor: pointer;
         & img {
           width: px2rem(185);
           height: px2rem(185);

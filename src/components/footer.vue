@@ -25,8 +25,8 @@ export default {
         {
           name: '搜索',
           img: ['../../static/select.png', '../../static/select-1.png'],
-          describe: 'select',
-          router: '/select'
+          describe: 'search',
+          router: '/search'
         },
         {
           name: '分类',
@@ -60,7 +60,6 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '@/scss/variate.scss';
 footer {
   position: absolute;
   bottom: 0;

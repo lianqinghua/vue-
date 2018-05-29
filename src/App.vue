@@ -12,7 +12,6 @@ export default {
 
 <style lang="scss">
 @import 'mint-ui/lib/style.css';
-@import './scss/variate.scss';
 * {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

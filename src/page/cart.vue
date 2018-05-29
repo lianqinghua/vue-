@@ -4,7 +4,9 @@
     <div class="content">
       <cartList></cartList>
     </div>
-    <cartTotal></cartTotal>
+    <div id="total">
+      <cartTotal></cartTotal>
+    </div>
     <commonfooter :switch='3'></commonfooter>
   </div>
 </template>
@@ -22,7 +24,6 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '@/scss/variate.scss';
 .content {
   position: absolute;
   width: 100%;
@@ -30,5 +31,11 @@ export default {
   bottom: px2rem(180);
   overflow: auto;
   background: #eee;
+}
+#total {
+  position: absolute;
+  bottom: px2rem(99);
+  z-index: 999;
+  width: 100%;
 }
 </style>

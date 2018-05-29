@@ -1,6 +1,8 @@
 <template>
   <header>
-    <div class="left"></div>
+    <div class="left">
+      <slot name='left'></slot>
+    </div>
     <div class="title" v-text='comTitle'></div>
     <div class="right" @click="edits" v-text="editName[i]" v-if=hid></div>
   </header>
@@ -35,9 +37,6 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '@/scss/variate.scss';
-// 设计图的宽度
-$designWidth: 750;
 header {
   position: absolute;
   top: 0;
@@ -56,6 +55,11 @@ header {
     top: px2rem(15);
     right: px2rem(25);
     font-size: px2rem(32);
+  }
+  .left {
+    position: absolute;
+    top: px2rem(13);
+    left: px2rem(13);
   }
 }
 </style>

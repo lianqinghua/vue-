@@ -1,20 +1,22 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 // 购物车
-import cart from '@/page/cart.vue'
+import cart from '@/page/cart'
 // 分类
-import category from '@/page/category.vue'
+import category from '@/page/category'
 // 首页
-import home from '@/page/home.vue'
+import home from '@/page/home'
 // 搜索
-import select from '@/page/select.vue'
+import search from '@/page/search'
 // 用户
-import user from '@/page/user.vue'
+import user from '@/page/user'
 
 // 结算订单
-import cartOrder from '@/page/cartOrder.vue'
-// q启动页
-import startup from '@/page/startup.vue'
+import cartOrder from '@/page/cartOrder'
+// 启动页
+import startup from '@/page/startup'
+// 详情页
+import details from '@/page/details'
 
 Vue.use(Router)
 
@@ -31,6 +33,11 @@ export default new Router({
       component: cart
     },
     {
+      path: '/details',
+      name: 'details',
+      component: details
+    },
+    {
       path: '/cartOrder',
       name: 'cartOrder',
       component: cartOrder
@@ -41,9 +48,9 @@ export default new Router({
       component: user
     },
     {
-      path: '/select',
-      name: 'select',
-      component: select
+      path: '/search',
+      name: 'search',
+      component: search
     },
     {
       path: '/category',

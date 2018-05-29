@@ -1,11 +1,5 @@
 <template>
   <div class="cartTotal">
-    <div class="checkAll" @click="totalAll">
-      <div class="check">
-        <div class="check-in" v-if='checkAll'></div>
-      </div>
-      <span>全选</span>
-    </div>
     <div class="total">
       <span>合计：</span>
       <span class="red" v-text='total'>12323</span>
@@ -18,62 +12,19 @@
   </div>
 </template>
 <script>
-import { mapState, mapMutations } from 'vuex'
+import { mapState } from 'vuex'
 export default {
   name: 'cartTotal',
   data() {
     return {}
   },
   methods: {
-    ...mapMutations(['setTotal', 'setCount', 'setCheck', 'setOrder']),
-    totalAll() {
-      let checks = !this.checkAll
-      this.setCheck(checks)
-      let counts = 0
-      let total = 0
-      this.cartData.forEach(element => {
-        element.hid = checks
-        element.goods.forEach(item => {
-          item.hid = checks
-          if (item.hid === true) {
-            total += parseInt(item.price) * parseInt(item.num)
-            ++counts
-            this.setTotal(total)
-            this.setCount(counts)
-          } else {
-            this.setTotal(0)
-            this.setCount(0)
-          }
-        })
-      })
-    },
-    accounts() {
-      let goods = []
-      this.cartData.forEach(element => {
-        element.goods.forEach(item => {
-          if (item.hid === true) {
-            goods.push(item)
-          }
-        })
-      })
-      if (goods.length === 0) {
-        alert('请选择你要结算的商品')
-      } else {
-        this.setOrder(goods)
-        this.$router.push({
-          path: '/cartOrder',
-          name: 'cartOrder'
-        })
-      }
-    }
+    accounts() {}
   },
   computed: {
-    ...mapState(['cartData', 'total', 'count', 'checkAll'])
+    ...mapState(['total', 'count'])
   },
-  mounted() {
-    this.setTotal(0)
-    this.setCount(0)
-  }
+  mounted() {}
 }
 </script>
 <style lang="scss" scoped>
