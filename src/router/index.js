@@ -17,6 +17,8 @@ import cartOrder from '@/page/cartOrder'
 import startup from '@/page/startup'
 // 详情页
 import details from '@/page/details'
+// 产品列表页
+import selectResult from '@/page/selectResult'
 
 Vue.use(Router)
 
@@ -26,6 +28,11 @@ export default new Router({
       path: '/',
       name: 'startup',
       component: startup
+    },
+    {
+      path: '/selectResult',
+      name: 'selectResult',
+      component: selectResult
     },
     {
       path: '/cart',

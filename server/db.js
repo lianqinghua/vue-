@@ -6,68 +6,7 @@ module.exports = function() {
     store: [],
     goods: [],
     // 加入购物车数据
-    cartData: [
-      {
-        id: 0,
-        storename: '歌莉娅官方旗舰店',
-        goods: [
-          {
-            id: 0,
-            img: '../../static/goodsImg1.jpg',
-            name: '歌莉娅女装 2016冬装新款 连衣帽针织衫 显瘦身 15DJ8C040',
-            color: 'red',
-            size: 's',
-            oldprice: 200,
-            price: 123,
-            num: 1,
-            stock: 10,
-            monSales: 123
-          },
-          {
-            id: 1,
-            img: '../../static/goodsImg1.jpg',
-            name: '歌莉娅女装 2016冬装新款 连衣帽针织衫 显瘦身 15DJ8C040',
-            color: 'red',
-            size: 's',
-            price: 123,
-            num: 1,
-            stock: 10,
-            oldprice: 200,
-            monSales: 123
-          }
-        ]
-      },
-      {
-        id: 1,
-        storename: '歌莉娅官方旗舰店',
-        goods: [
-          {
-            id: 0,
-            img: '../../static/goodsImg1.jpg',
-            name: '歌莉娅女装 2016冬装新款 连衣帽针织衫 显瘦身 15DJ8C040',
-            color: 'red',
-            size: 's',
-            oldprice: 200,
-            price: 123,
-            num: 1,
-            stock: 10,
-            monSales: 123
-          },
-          {
-            id: 1,
-            img: '../../static/goodsImg1.jpg',
-            name: '歌莉娅女装 2016冬装新款 连衣帽针织衫 显瘦身 15DJ8C040',
-            color: 'red',
-            size: 's',
-            oldprice: 200,
-            price: 123,
-            num: 1,
-            stock: 10,
-            monSales: 123
-          }
-        ]
-      }
-    ]
+    cartData: []
   }
   var images = [1, 2, 3].map(x =>
     Random.image('200x100', Random.color(), Random.word(2, 6))
@@ -80,21 +19,36 @@ module.exports = function() {
       storename: content + '官方旗舰店'
     })
   }
-  for (let i = 1; i < 10; i++) {
-    let content = Random.cparagraph(0, 3)
+  //分类
+  let arr = [
+    '热门推荐',
+    '潮流女装',
+    '品牌男装',
+    '内衣配饰',
+    '电脑办公',
+    '手机数码',
+    '母婴频道',
+    '图书音像',
+    '家用电器',
+    '家具器材',
+    '家居生活'
+  ]
+  for (let i = 1; i < 120; i++) {
+    let content = Random.cparagraph(1)
     //商品 '../../static/goodsImg1.jpg'
     data.goods.push({
       id: i,
-      storeId: 1 + Math.random() * 9,
+      storeId: Math.round(1 + Math.random() * 8),
       img: images,
-      name: '歌莉娅女装 2016冬装新款 连衣帽针织衫 显瘦身 15DJ8C040',
+      name: content,
       color: 'red',
       size: 's',
-      oldprice: 200,
-      price: 123,
+      oldprice: 200 + i,
+      price: Math.round(123 + Math.random() * 20 + i),
+      stock: Math.round(1 + Math.random() * 20),
+      monSales: Math.round(1 + Math.random() * 20),
       num: 1,
-      stock: 10,
-      monSales: 123
+      category: arr[Math.round(Math.random() * 11)]
     })
   }
   return data

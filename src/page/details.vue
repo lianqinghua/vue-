@@ -2,11 +2,11 @@
   <div id="details">
     <div class="container">
       <div class="image">
-        <router-link to='/cart'>
-          <div class="back">
-            <div class="back-in"></div>
-          </div>
-        </router-link>
+
+        <div class="back" @click="res()">
+          <div class="back-in"></div>
+        </div>
+
         <img :src='goods.img' alt="">
       </div>
       <div class="center">
@@ -53,13 +53,15 @@
           <p>收藏</p>
         </div>
         <div class="order-num icon-wid">
-          <img src="@/assets/des-carts.png" alt="">
-          <i v-text="cartCount"></i>
-          <p>购物车</p>
+          <router-link to='/cart' tag="span">
+            <img src="@/assets/des-carts.png" alt="">
+            <i v-text="cartCount"></i>
+            <p>购物车</p>
+          </router-link>
         </div>
       </div>
       <div class="submit">
-        <div class="cart-goods wid" @click="addCart">加入购物车</div>
+        <div class="cart-goods wid" @click="Cart">加入购物车</div>
         <div class="order wid" @click="desire">立即购买</div>
       </div>
     </footer>
@@ -71,7 +73,8 @@ export default {
   name: 'details',
   data() {
     return {
-      goods: ''
+      goods: '',
+      stores: ''
     }
   },
   methods: {
@@ -82,29 +85,46 @@ export default {
       'addCart',
       'addCount'
     ]),
+    res() {
+      this.$router.back()
+    },
     desire() {
       let data = this.goods
       this.setOrder([data])
-      this.setTotal(data.price * data.num)
+      this.setTotal(data.price)
       this.setCount(1)
       this.$router.push({
         path: '/cartOrder',
         name: 'cartOrder'
       })
     },
-    addCart() {
+    Cart() {
+      // 购物车数量加一
       let cartCount = this.cartCount
-      let goodsss = this.$route.params
-      console.log(goodsss)
-      this.addCart(goodsss)
       this.addCount(cartCount + 1)
+      // 追加商品
+
+      this.addCart([this.goods, this.stores])
+    },
+    async goodsList(start) {
+      const { data } = await this.$http.get(
+        ` http://localhost:3000/goods/${start}`
+      )
+      this.storeList(data.storeId)
+      this.goods = data
+    },
+    async storeList(start) {
+      const { data } = await this.$http.get(
+        ` http://localhost:3000/store/${start}`
+      )
+      this.stores = data
     }
   },
   computed: {
     ...mapState(['cartCount'])
   },
   mounted() {
-    this.goods = this.$route.params
+    this.goodsList(this.$route.query.id)
   }
 }
 </script>

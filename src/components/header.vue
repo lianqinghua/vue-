@@ -3,7 +3,8 @@
     <div class="left">
       <slot name='left'></slot>
     </div>
-    <div class="title" v-text='comTitle'></div>
+    <div class="title" v-text='comTitle'>
+    </div>
     <div class="right" @click="edits" v-text="editName[i]" v-if=hid></div>
   </header>
 </template>

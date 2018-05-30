@@ -4,68 +4,7 @@ Vue.use(vuex)
 /* 数据 */
 const state = {
   // 加入购物车数据
-  cartData: [
-    // {
-    //   id: 0,
-    //   storename: '歌莉娅官方旗舰店',
-    //   goods: [
-    //     {
-    //       id: 0,
-    //       img: '../../static/goodsImg1.jpg',
-    //       name: '歌莉娅女装 2016冬装新款 连衣帽针织衫 显瘦身 15DJ8C040',
-    //       color: 'red',
-    //       size: 's',
-    //       oldprice: 200,
-    //       price: 123,
-    //       num: 1,
-    //       stock: 10,
-    //       monSales: 123
-    //     },
-    //     {
-    //       id: 1,
-    //       img: '../../static/goodsImg1.jpg',
-    //       name: '歌莉娅女装 2016冬装新款 连衣帽针织衫 显瘦身 15DJ8C040',
-    //       color: 'red',
-    //       size: 's',
-    //       price: 123,
-    //       num: 1,
-    //       stock: 10,
-    //       oldprice: 200,
-    //       monSales: 123
-    //     }
-    //   ]
-    // },
-    // {
-    //   id: 1,
-    //   storename: '歌莉娅官方旗舰店',
-    //   goods: [
-    //     {
-    //       id: 0,
-    //       img: '../../static/goodsImg1.jpg',
-    //       name: '歌莉娅女装 2016冬装新款 连衣帽针织衫 显瘦身 15DJ8C040',
-    //       color: 'red',
-    //       size: 's',
-    //       oldprice: 200,
-    //       price: 123,
-    //       num: 1,
-    //       stock: 10,
-    //       monSales: 123
-    //     },
-    //     {
-    //       id: 1,
-    //       img: '../../static/goodsImg1.jpg',
-    //       name: '歌莉娅女装 2016冬装新款 连衣帽针织衫 显瘦身 15DJ8C040',
-    //       color: 'red',
-    //       size: 's',
-    //       oldprice: 200,
-    //       price: 123,
-    //       num: 1,
-    //       stock: 10,
-    //       monSales: 123
-    //     }
-    //   ]
-    // }
-  ],
+  cartData: [],
   //  购买列表
   orderDate: '',
   // 选择商品的总价格
@@ -77,10 +16,20 @@ const state = {
   // 编辑
   edit: false,
   // 购物车数量
-  cartCount: 4
+  cartCount: 0,
+  goodsList: {
+    category: '热门推荐',
+    list: [],
+    sel: '',
+    newpage: ''
+  }
 }
 /* 同步写入 */
 const mutations = {
+  // 请求
+  setReq(state, stop) {
+    state.goodsList.req = stop
+  },
   // 写入total
   setTotal(state, stop) {
     state.total = stop
@@ -103,18 +52,55 @@ const mutations = {
   },
   // 添加购物车
   addCart(state, stop) {
-    state.cartData.push(stop)
+    let num = 0
+    let a = 0
+    if (state.cartData.length === 0) {
+      stop[1].goods = []
+      stop[1].goods.push(stop[0])
+      state.cartData.push(stop[1])
+    } else {
+      state.cartData.forEach(element => {
+        if (element.id === stop[1].id) {
+          num++
+          element.goods.forEach(item => {
+            if (item.id === stop[0].id) {
+              item.num++
+              a++
+            }
+          })
+          if (a === 0) {
+            element.goods.push(stop[0])
+          }
+        }
+      })
+      if (num === 0) {
+        stop[1].goods = []
+        stop[1].goods.push(stop[0])
+        state.cartData.push(stop[1])
+      }
+    }
   },
+  // 添加购物车商品数量
   addCount(state, stop) {
     state.cartCount = stop
+  },
+  // 分类
+  selCategory(state, stop) {
+    state.goodsList.category = stop
+  },
+  // 分类列表
+  selGoodsList(state, stop) {
+    state.goodsList.list = stop
+  },
+  // 追加
+  addGoodsList(state, stop) {
+    stop.forEach(element => {
+      state.goodsList.list.push(element)
+    })
   }
 }
 /* 异步写入 */
-const actions = {
-  getCartData(state) {
-    console.log(state)
-  }
-}
+const actions = {}
 /* 将数据包装之后读出 */
 const getters = {}
 const store = new vuex.Store({

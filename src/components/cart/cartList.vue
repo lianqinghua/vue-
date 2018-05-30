@@ -1,6 +1,7 @@
 <template>
   <div class="cartList">
     <div class="cartList" v-for="(item,i) in cartData" :key='i'>
+
       <div class="store-top" @click="checks(item)">
         <div class="check">
           <div class="check-in" v-if="item.hid"></div>
@@ -11,9 +12,11 @@
         <div class="check" @click="check(element,i)">
           <div class="check-in" v-if='element.hid'></div>
         </div>
-        <div class="item-img" @click="delit(element)">
-          <img :src="element.img" :alt="element.name">
-        </div>
+        <router-link tag='span' :to="'/details?id='+element.id">
+          <div class="item-img">
+            <img :src="element.img" :alt="element.name">
+          </div>
+        </router-link>
         <div class="item-details">
           <div class="item-name" v-text="element.name">歌莉娅女装 2016冬装新款 连衣帽针织衫 显瘦身 15DJ8C040</div>
           <div class="item-tab-1">
@@ -50,6 +53,7 @@
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </template>
@@ -154,6 +158,12 @@ export default {
       display: flex;
       display: -webkit-flex;
       align-items: center;
+      .storename {
+        width: px2rem(500);
+        overflow: hidden;
+        white-space: nowrap; /*不换行*/
+        text-overflow: ellipsis; /*超出部分文字以...显示*/
+      }
     }
     .store-item {
       display: -webkit-box;
